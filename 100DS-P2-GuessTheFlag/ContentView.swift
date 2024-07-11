@@ -23,6 +23,8 @@ struct ContentView: View {
                 .ignoresSafeArea()
             
             VStack {
+                Spacer()
+                
                 VStack {
                     Text("Select the correct flag:")
                         .font(.title)
@@ -47,12 +49,26 @@ struct ContentView: View {
                     }
                 }
                 .padding(50)
+                
+                Spacer()
+                Spacer()
+                
+                Text("Streak: \(runStreak)")
+                    .foregroundColor(.white)
+                    .font(.title2)
+                
+                Spacer()
             }
         }
         .alert(scoreMessage, isPresented: $showingScore) {
-            Button("Next Question", action: askQuestion)
+            if(runStreak >= 5){
+                Button("Restart Game", action: restartGame)
+            } else {
+                Button("Next Question", action: askQuestion)
+            }
+            
         } message: {
-            Text("Your streak is now \(runStreak)")
+            //Text("Your streak is now \(runStreak)")
         }
     }
     
@@ -74,6 +90,11 @@ struct ContentView: View {
         
         //state change to show alert
         showingScore = true
+    }
+    
+    func restartGame(){
+        runStreak = 0
+        askQuestion()
     }
 }
 
