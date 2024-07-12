@@ -7,6 +7,20 @@
 
 import SwiftUI
 
+//Not required in this scenario but shows the example
+struct FlagImage: View {
+    
+    var imageName: String
+    
+    var body: some View {
+        Image(imageName)
+            .cornerRadius(20)
+            .shadow(radius: 5)
+    }
+    
+}
+
+
 struct ContentView: View {
     
     @State private var countries = ["Estonia", "France", "Germany", "Ireland", "Italy", "Monaco", "Nigeria", "Poland", "Spain", "UK", "Ukraine", "US"].shuffled()
@@ -40,12 +54,9 @@ struct ContentView: View {
                         Button {
                             flagTapped(number)
                         } label: {
-                            Image(countries[number])
-                                .cornerRadius(20)
-                                .shadow(radius: 5)
+                            FlagImage(imageName: countries[number])
                         }
                         .padding(10)
-                        
                     }
                 }
                 .padding(50)
